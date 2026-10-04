@@ -1,2 +1,2 @@
 # yunque_bbdd
-Base de Datos del proyecto Yunque
+Base de Datos del proyecto Yunque.
