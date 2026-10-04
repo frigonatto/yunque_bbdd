@@ -1,0 +1,16 @@
+
+
+DatosComunes
+  |
+  '----> Provincias
+  |
+  '----> CodigosPostales  (Localidades)
+  |
+  '----> CodigosPostalesObservaciones
+  '----> Domicilios
+
+  
+  Proveedores
+    |
+    '----> Proveedores
+
