@@ -94,10 +94,20 @@ CREATE UNIQUE NONCLUSTERED INDEX [IDX_TiposDeDocumentos_Descripcion] ON [DatosCo
 GO
 
 
-
 --Proveedores
 
 CREATE SCHEMA Proveedores
+
+/****** Object:  Table [Proveedores].[Rubros]    Script Date: 04/10/2026 12:33:48 ******/
+CREATE TABLE [Proveedores].[Rubros](
+	[Id] [smallint] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](25) NOT NULL
+ CONSTRAINT [PK_Rubros] PRIMARY KEY CLUSTERED
+(
+	[Id] ASC
+) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY] 
+) ON [PRIMARY]
+GO
 
 /****** Object:  Table [Proveedores].[Proveedores]    Script Date: 04/10/2026 11:22:48 ******/
 CREATE TABLE [Proveedores].[Proveedores](
@@ -106,7 +116,8 @@ CREATE TABLE [Proveedores].[Proveedores](
 	[RazonSocial] [varchar](40) NOT NULL,
 	[IdDomicilio] [int] NOT NULL,
 	[IdTipoDeDocumento] [smallint] NOT NULL,
-	[NroDocumento] [varchar](10) NOT NULL
+	[NroDocumento] [varchar](10) NOT NULL,
+	[IdRubro] [smallint] NOT NULL
  CONSTRAINT [PK_Proveedores] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -117,7 +128,13 @@ GO
 
 
 --CONSTRAINTS
-
+/****** Object:  ForeignKey [FK_Domicilios_CodigosPostales]  Script Date: 4/10/2026 12:40:26 ******/
+ALTER TABLE [DatosComunes].[Domicilios]  WITH CHECK ADD  CONSTRAINT [FK_Domicilios_CodigosPostales] FOREIGN KEY([IdCodigoPostal])
+REFERENCES [DatosComunes].[CodigosPostales] ([Id])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [DatosComunes].[Domicilios] CHECK CONSTRAINT [FK_Domicilios_CodigosPostales]
+GO
 /****** Object:  ForeignKey [FK_CodigosPostales_Provincias]  Script Date: 4/10/2026 12:05:26 ******/
 ALTER TABLE [DatosComunes].[CodigosPostales]  WITH CHECK ADD  CONSTRAINT [FK_CodigosPostales_Provincias] FOREIGN KEY([ProvinciaId])
 REFERENCES [DatosComunes].[Provincias] ([Id])
@@ -138,9 +155,15 @@ REFERENCES [DatosComunes].[Domicilios] ([Id])
 GO
 ALTER TABLE [Proveedores].[Proveedores] CHECK CONSTRAINT FK_Proveedores_Domicilios
 GO
-/****** Object:  ForeignKey [FK_Proveedores_TiposDeDocumentos]  Script Date: 10/8/2024 22:12:06  ******/
+/****** Object:  ForeignKey [FK_Proveedores_TiposDeDocumentos]  Script Date: 4/10/2026 12:35:06  ******/
 ALTER TABLE [Proveedores].[Proveedores]  WITH CHECK ADD  CONSTRAINT FK_Proveedores_TiposDeDocumentos FOREIGN KEY([IdTipoDeDocumento])
 REFERENCES [DatosComunes].[TiposDeDocumentos] ([Codigo])
 GO
 ALTER TABLE [Proveedores].[Proveedores] CHECK CONSTRAINT FK_Proveedores_TiposDeDocumentos 
+GO
+/****** Object:  ForeignKey [FK_Proveedores_Rubros]  Script Date: 4/10/2026 12:36:06  ******/
+ALTER TABLE [Proveedores].[Proveedores]  WITH CHECK ADD  CONSTRAINT FK_Proveedores_Rubros FOREIGN KEY([IdRubro])
+REFERENCES [Proveedores].[Rubros] ([Id])
+GO
+ALTER TABLE [Proveedores].[Proveedores] CHECK CONSTRAINT FK_Proveedores_Rubros 
 GO
