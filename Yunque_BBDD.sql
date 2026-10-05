@@ -93,6 +93,29 @@ CREATE UNIQUE NONCLUSTERED INDEX [IDX_TiposDeDocumentos_Descripcion] ON [DatosCo
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 
+/****** Object:  Table [DatosComunes].[TiposDeComprobantes]    Script Date: 4/10/2026 22:31:38 ******/
+CREATE TABLE [DatosComunes].[TiposDeComprobantes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Tipo] [varchar](3) NOT NULL,
+	[Descripcion] [varchar](50) NOT NULL,
+	[Signo] [varchar](1) NOT NULL,
+	[UltimoNumero] [int] NOT NULL,
+	[FechaUltimoNumero] [datetime] NOT NULL,
+	[UsuarioUltimoNumero] [int] NOT NULL,
+ CONSTRAINT [PK_TiposDeComprobantes] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Index [IDX_TiposDeComprobantes_Tipo]  Script Date: 4/10/2026 22:31:38 ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IDX_TiposDeComprobantes_Tipo] ON [DatosComunes].[TiposDeComprobantes]
+(
+	[Tipo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+
 
 --Proveedores
 

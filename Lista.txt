@@ -3,14 +3,15 @@
 DatosComunes
   |
   '----> Provincias
-  |
   '----> CodigosPostales  (Localidades)
-  |
   '----> CodigosPostalesObservaciones
   '----> Domicilios
+  '----> TiposDeDocumentos
+  '----> TiposDeComprobantes
 
   
   Proveedores
     |
+    '----> Rubros
     '----> Proveedores
 
